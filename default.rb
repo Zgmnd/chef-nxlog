@@ -4,16 +4,8 @@
 #
 if platform_family?("rhel")
 
- remote_file "#{Chef::Config[:file_cache_path]}/nxlog-ce-2.5.1089-1.x86_64.rpm" do
-        source "http://downloads.sourceforge.net/project/nxlog-ce/older-releases/nxlog-ce-2.5.1089-1.x86_64.rpm"
-        action :create
-        not_if "rpm -qa | grep nxlog"
- end
-
- yum_package "nxlog" do
-        source "#{Chef::Config[:file_cache_path]}/nxlog-ce-2.5.1089-1.x86_64.rpm"
-        action :install
-        not_if "rpm -qa | grep nxlog"
+ yum_package "http://downloads.sourceforge.net/project/nxlog-ce/nxlog-ce-2.7.1191-1.x86_64.rpm" do
+	       action :localinstall
  end
 
  template "/etc/init.d/nxlog" do
